@@ -30,7 +30,7 @@ void vector_del(struct vector *vec)
 	free(vec);
 }
 
-void vector_push(struct vector *vec, void *v)
+void vector_push(struct vector *vec, void *val)
 {
 	size_t newnmemb;
 
@@ -49,7 +49,7 @@ void vector_push(struct vector *vec, void *v)
 		);
 		vec->cap = newnmemb;
 	}
-	vec->arr[vec->len++] = v;
+	vec->arr[vec->len++] = val;
 }
 
 size_t vector_len(struct vector *vec)
