@@ -32,6 +32,8 @@ void vector_del(struct vector *vec)
 
 void vector_push(struct vector *vec, void *v)
 {
+	size_t newnmemb;
+
 	if (vec->cap < vec->len)
 		errx(1, "BUG: vec->cap < vec->len");
 	else if (vec->cap == vec->len) {
@@ -39,11 +41,13 @@ void vector_push(struct vector *vec, void *v)
 			errno = ENOMEM;
 			err(1, "vector_push");
 		}
+		newnmemb = vec->cap * 2;
 		vec->arr = xreallocarray(
 			vec->arr,
 			vec->cap * 2,
 			sizeof(void *)
 		);
+		vec->cap = newnmemb;
 	}
 	vec->arr[vec->len++] = v;
 }
