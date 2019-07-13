@@ -56,3 +56,12 @@ size_t vector_len(struct vector *vec)
 {
 	return vec->len;
 }
+
+void *vector_get(struct vector *vec, size_t index)
+{
+	if (index >= vec->len) {
+		errno = EINVAL;
+		err(1, "vector_get");
+	}
+	return vec->arr[index];
+}

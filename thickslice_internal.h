@@ -14,5 +14,6 @@ struct vector *vector_new(void);
 void vector_del(struct vector *vec);
 void vector_push(struct vector *vec, void *v);
 size_t vector_len(struct vector *vec);
+void *vector_get(struct vector *vec, size_t index);
 
 #endif  /* THICKSLICE_INTERNAL_H */
