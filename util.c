@@ -4,7 +4,8 @@
 #include <string.h>
 #include <stdarg.h>
 
-void *xmalloc(size_t size)
+void *
+xmalloc(size_t size)
 {
 	void *r = malloc(size);
 	if (r == NULL)
@@ -12,7 +13,8 @@ void *xmalloc(size_t size)
 	return r;
 }
 
-void *xreallocarray(void *ptr, size_t nmemb, size_t size)
+void *
+xreallocarray(void *ptr, size_t nmemb, size_t size)
 {
 	void *r = reallocarray(ptr, nmemb, size);
 	if (r == NULL)
@@ -20,12 +22,14 @@ void *xreallocarray(void *ptr, size_t nmemb, size_t size)
 	return r;
 }
 
-void *xallocarray(size_t nmemb, size_t size)
+void *
+xallocarray(size_t nmemb, size_t size)
 {
 	return xreallocarray(NULL, nmemb, size);
 }
 
-char *xstrdup(const char *str)
+char *
+xstrdup(const char *str)
 {
 	char *r;
 	r = strdup(str);
@@ -34,7 +38,8 @@ char *xstrdup(const char *str)
 	return r;
 }
 
-char *erreno(int eval, int eno, const char *fmt, ...)
+char *
+erreno(int eval, int eno, const char *fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);

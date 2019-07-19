@@ -14,7 +14,8 @@ struct vector {
 	size_t cap;  /* memory capacity of variadic array */
 };
 
-static void grow(struct vector *vec)
+static void
+grow(struct vector *vec)
 {
 	size_t newnmemb;
 	if (vec->cap > SIZE_MAX / 2)
@@ -24,7 +25,8 @@ static void grow(struct vector *vec)
 	vec->cap = newnmemb;
 }
 
-struct vector *vector_new(void)
+struct vector *
+vector_new(void)
 {
 	struct vector *r = xmalloc(sizeof(struct vector));
 	*r = (struct vector){
@@ -35,13 +37,15 @@ struct vector *vector_new(void)
 	return r;
 }
 
-void vector_del(struct vector *vec)
+void
+vector_del(struct vector *vec)
 {
 	free(vec->arr);
 	free(vec);
 }
 
-void vector_push(struct vector *vec, void *val)
+void
+vector_push(struct vector *vec, void *val)
 {
 	if (vec->cap < vec->len)
 		errx(1, "BUG: vec->cap < vec->len");
@@ -50,14 +54,16 @@ void vector_push(struct vector *vec, void *val)
 	vec->arr[vec->len++] = val;
 }
 
-size_t vector_len(struct vector *vec)
+size_t
+vector_len(struct vector *vec)
 {
 	return vec->len;
 }
 
-void *vector_get(struct vector *vec, size_t index)
+void *
+vector_get(struct vector *vec, size_t idx)
 {
-	if (index >= vec->len)
+	if (idx >= vec->len)
 		erreno(1, EINVAL, "vector_get");
-	return vec->arr[index];
+	return vec->arr[idx];
 }

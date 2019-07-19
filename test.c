@@ -10,7 +10,8 @@
 			errx(1, "assert_true: %s", #cond);	\
 	} while (0)
 
-void regress_vector(void)
+void
+regress_vector(void)
 {
 	struct vector *vec;
 	int *tmpi;
@@ -19,7 +20,7 @@ void regress_vector(void)
 	vec = vector_new();
 	for (i = nveclen; i > 0; i--) {
 		tmpi = xmalloc(sizeof(int));
-		*tmpi = i*i;
+		*tmpi = i * i;
 		vector_push(vec, tmpi);
 	}
 	assert_true(*(int *)vector_get(vec, 0) == 100);
@@ -30,7 +31,8 @@ void regress_vector(void)
 	vector_del(vec);
 }
 
-void regress_map(void)
+void
+regress_map(void)
 {
 	struct hashmap *map;
 	char *keys[] = {
@@ -51,7 +53,7 @@ void regress_map(void)
 		"key14 victor",
 		"key15 plod",
 		"key16 stave",
-		"key17 zoe",
+		"key17 zoe"
 	};
 	int *tmpi;
 	size_t i;
@@ -64,21 +66,21 @@ void regress_map(void)
 		if (hashmap_has(map, keys[i]))
 			free(hashmap_get(map, keys[i]));
 		tmpi = xmalloc(sizeof(int));
-		*tmpi = i*2;
+		*tmpi = i * 2;
 		hashmap_set(map, keys[i], tmpi);
 	}
 	assert_true(*(int *)hashmap_get(map, keys[0]) == 0);
 	assert_true(*(int *)hashmap_get(map, keys[8]) == 26);
 	assert_true(*(int *)hashmap_get(map, keys[17]) == 34);
 	iter = hashmap_keys(map);
-	for (k = keyiter_next(iter); k != NULL; k = keyiter_next(iter)) {
+	for (k = keyiter_next(iter); k != NULL; k = keyiter_next(iter))
 		free(hashmap_get(map, k));
-	}
 	hashmap_del(map);
 	keyiter_del(iter);
 }
 
-int main(void)
+int
+main(void)
 {
 	regress_vector();
 	regress_map();
