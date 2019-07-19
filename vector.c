@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "thickslice.h"
 #include "thickslice_internal.h"
 
 const size_t VECTOR_INIT_CAP = 8;

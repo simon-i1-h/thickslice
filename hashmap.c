@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "thickslice.h"
 #include "thickslice_internal.h"
 
 const size_t HASHMAP_INIT_SIZE = 16;

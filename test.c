@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#include "thickslice.h"
 #include "thickslice_internal.h"
 
 #define assert_true(cond) do {					\
