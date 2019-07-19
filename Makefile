@@ -3,7 +3,7 @@
 .PHONY: clean test valgrind
 
 TEST := thickslice-test
-OBJS := util.o vector.o
+OBJS := hashmap.o util.o vector.o
 TEST_OJBS := test.o
 CFLAGS := -pedantic -g -O -Wall -Wextra
 

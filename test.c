@@ -29,8 +29,57 @@ void regress_vector(void)
 	vector_del(vec);
 }
 
+void regress_map(void)
+{
+	struct hashmap *map;
+	char *keys[] = {
+		"key1 alice",
+		"key2 bob",
+		"key3 carol",
+		"key4 dave",
+		"key5 eve",
+		"key6 isaac",
+		"key7 ivan",
+		"key8 justin",
+		"key9 mallory",
+		"key10 matilda",
+		"key11 oscar",
+		"key12 pat",
+		"key13 peggy",
+		"key9 mallory",
+		"key14 victor",
+		"key15 plod",
+		"key16 stave",
+		"key17 zoe",
+	};
+	int *tmpi;
+	size_t i;
+	const size_t keylen = arrlen(keys);
+	struct keyiter *iter;
+	char *k;
+	map = hashmap_new();
+
+	for (i = 0; i < keylen; i++) {
+		if (hashmap_has(map, keys[i]))
+			free(hashmap_get(map, keys[i]));
+		tmpi = xmalloc(sizeof(int));
+		*tmpi = i*2;
+		hashmap_set(map, keys[i], tmpi);
+	}
+	assert_true(*(int *)hashmap_get(map, keys[0]) == 0);
+	assert_true(*(int *)hashmap_get(map, keys[8]) == 26);
+	assert_true(*(int *)hashmap_get(map, keys[17]) == 34);
+	iter = hashmap_keys(map);
+	for (k = keyiter_next(iter); k != NULL; k = keyiter_next(iter)) {
+		free(hashmap_get(map, k));
+	}
+	hashmap_del(map);
+	keyiter_del(iter);
+}
+
 int main(void)
 {
 	regress_vector();
+	regress_map();
 	return 0;
 }
