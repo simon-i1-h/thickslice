@@ -27,7 +27,7 @@ calc_hash(char *str)
 	/* DJBX33A algorithm */
 	size_t i, r = 5381;
 	for (i = 0; str[i] != '\0'; i++)
-		r = (r << 5) + str[i];  /* r << 5 == r * 33 */
+		r = (r << 5) + r + str[i];  /* (r << 5) + r == r * 33 */
 	return r;
 }
 
