@@ -105,7 +105,6 @@ rehash(struct hashmap *map)
 	free(tmp);
 }
 
-
 struct hashmap *
 hashmap_new(void)
 {
