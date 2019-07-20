@@ -1,7 +1,7 @@
 The thickslice is a toy json parser.
 
 exception:
-- The string cannot contain a null character.
+- Strings cannot contain null characters.
 
 build:
   $ bmake
