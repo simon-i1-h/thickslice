@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+#define arrlen(arr) (sizeof(arr) / sizeof(arr[0]))
+
 /* util.c */
 void *xmalloc(size_t size);
 void *xreallocarray(void *ptr, size_t nmemb, size_t size);

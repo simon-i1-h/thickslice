@@ -4,8 +4,6 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#define arrlen(arr) (sizeof(arr) / sizeof(arr[0]))
-
 /* vector.c */
 struct vector;
 struct vector *vector_new(void);
