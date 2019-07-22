@@ -19,7 +19,7 @@ struct hashmap {
 
 struct keyiter {
 	struct hashmap *map;
-	ssize_t count;
+	size_t count;
 };
 
 static size_t
@@ -158,8 +158,14 @@ hashmap_keys(struct hashmap *map)
 char *
 keyiter_next(struct keyiter *i)
 {
-	i->count = next_index(i->map, i->count);
-	return i->count == -1 ? NULL : i->map->keys[i->count++];
+	ssize_t idx;
+	idx = next_index(i->map, i->count);
+	if (idx == -1)
+		return NULL;
+	else {
+		i->count = idx;
+		return i->map->keys[i->count++];
+	}
 }
 
 void
