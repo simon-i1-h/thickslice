@@ -13,8 +13,8 @@ const size_t HASHMAP_INIT_SIZE = 16;
 struct hashmap {
 	char **keys;
 	void **vals;
-	size_t len;  /* length of associated array */
-	size_t cap;  /* memory capacity of associated array */
+	size_t len;  /* length of associative array */
+	size_t cap;  /* memory capacity of associative array */
 };
 
 struct keyiter {
