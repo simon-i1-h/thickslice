@@ -22,6 +22,7 @@ struct keyiter {
 	size_t count;
 };
 
+/* NOTE: https://cr.yp.to/siphash/siphash-20120620.pdf */
 static size_t
 calc_hash(char *str)
 {
