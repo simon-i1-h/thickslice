@@ -17,4 +17,4 @@ test: $(TEST)
 	./$(TEST)
 
 valgrind: $(TEST)
-	valgrind ./$(TEST)
+	valgrind --leak-check=full ./$(TEST)
