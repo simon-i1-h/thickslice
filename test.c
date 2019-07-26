@@ -99,11 +99,28 @@ test_obj(void)
 	fclose(f);
 }
 
+void
+test_arr(void)
+{
+	FILE *f;
+	char *s;
+	struct json *json;
+
+	s = "  [  \t \r]\n";
+	f = fmemopen(s, strlen(s), "r");
+	json_parse(f, &json);
+	assert_true(json->tag == JSON_ARR);
+	assert_true(vector_len(json->v.arr) == 0);
+	json_collapse(json);
+	fclose(f);
+}
+
 int
 main(void)
 {
 	regress_vector();
 	regress_map();
 	test_obj();
+	test_arr();
 	return 0;
 }

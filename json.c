@@ -25,6 +25,10 @@ json_del(struct json *json)
 	switch (json->tag) {
 	case JSON_OBJ:
 		hashmap_del(json->v.obj);
+		break;
+	case JSON_ARR:
+		vector_del(json->v.arr);
+		break;
 	}
 	free(json);
 }
@@ -34,6 +38,7 @@ json_collapse(struct json *json)
 {
 	struct keyiter *iter;
 	char *k;
+	size_t i, len;
 
 	switch (json->tag) {
 	case JSON_OBJ:
@@ -44,6 +49,15 @@ json_collapse(struct json *json)
 				k
 			));
 		keyiter_del(iter);
+		break;
+	case JSON_ARR:
+		len = vector_len(json->v.arr);
+		for (i = 0; i < len; i++)
+			json_collapse((struct json *)vector_get(
+				json->v.arr,
+				i
+			));
+		break;
 	}
 	json_del(json);
 }

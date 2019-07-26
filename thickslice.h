@@ -5,13 +5,15 @@
 #include <stdio.h>
 
 enum json_tag {
-	JSON_OBJ
+	JSON_OBJ,
+	JSON_ARR
 };
 
 struct json {
 	enum json_tag tag;
 	union {
 		struct hashmap *obj;
+		struct vector *arr;
 	} v;
 };
 

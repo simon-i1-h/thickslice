@@ -33,6 +33,12 @@ st_init:
 	} else if (tochar(c) == '}') {
 		*ret = (struct token){.tag = TOK_CLOSE_BRACE};
 		return;
+	} else if (tochar(c) == '[') {
+		*ret = (struct token){.tag = TOK_OPEN_BRACKET};
+		return;
+	} else if (tochar(c) == ']') {
+		*ret = (struct token){.tag = TOK_CLOSE_BRACKET};
+		return;
 	} else
 		errx(1, "unexpected character: %c", tochar(c));
 }
