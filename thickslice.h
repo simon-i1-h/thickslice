@@ -2,7 +2,18 @@
 #define THICKSLICE_H
 
 #include <stdbool.h>
-#include <stddef.h>
+#include <stdio.h>
+
+enum json_tag {
+	JSON_OBJ
+};
+
+struct json {
+	enum json_tag tag;
+	union {
+		struct hashmap *obj;
+	} v;
+};
 
 /* vector.c */
 struct vector;
@@ -23,5 +34,10 @@ bool hashmap_has(struct hashmap *map, char *key);
 struct keyiter *hashmap_keys(struct hashmap *map);
 char *keyiter_next(struct keyiter *i);
 void keyiter_del(struct keyiter *i);
+
+/* json.c */
+void json_parse(FILE *file, struct json **ret);
+void json_del(struct json *json);
+void json_collapse(struct json *json);
 
 #endif  /* THICKSLICE_H */

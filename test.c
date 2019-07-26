@@ -1,6 +1,7 @@
 #include <err.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "thickslice.h"
 #include "thickslice_internal.h"
@@ -79,10 +80,30 @@ regress_map(void)
 	keyiter_del(iter);
 }
 
+void
+test_obj(void)
+{
+	FILE *f;
+	char *s;
+	struct json *json;
+	struct keyiter *iter;
+
+	s = "  {  \t \r}\n";
+	f = fmemopen(s, strlen(s), "r");
+	json_parse(f, &json);
+	assert_true(json->tag == JSON_OBJ);
+	iter = hashmap_keys(json->v.obj);
+	assert_true(keyiter_next(iter) == NULL);
+	keyiter_del(iter);
+	json_collapse(json);
+	fclose(f);
+}
+
 int
 main(void)
 {
 	regress_vector();
 	regress_map();
+	test_obj();
 	return 0;
 }
